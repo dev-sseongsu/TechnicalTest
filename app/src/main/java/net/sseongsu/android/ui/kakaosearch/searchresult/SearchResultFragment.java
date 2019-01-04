@@ -5,6 +5,7 @@ import android.view.View;
 
 import net.sseongsu.android.R;
 import net.sseongsu.android.api.Api;
+import net.sseongsu.android.api.KaKaoSearch;
 import net.sseongsu.android.ui.common.BaseFragment;
 import net.sseongsu.android.ui.kakaosearch.model.ImageSearchResult;
 import net.sseongsu.android.ui.kakaosearch.search.SearchViewModel;
@@ -88,7 +89,9 @@ public final class SearchResultFragment extends BaseFragment {
 
     public void search(@NonNull String query) {
         this.query = query;
-        Api.get(requireContext()).getKaKaoSearch().searchImage(query).observe(this, searchResultObserver);
+//        Api.get(requireContext()).getKaKaoSearch().searchImage(query).observe(this, searchResultObserver);
+        KaKaoSearch.Request request = KaKaoSearch.Request.newBuilder().setQuery(query).build();
+        Api.get(requireContext()).getKaKaoSearch().searchImage(request).observe(this, searchResultObserver);
     }
 
     private void setRecyclerViewData(@NonNull ImageSearchResult imageSearchResult) {
