@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 import timber.log.Timber;
 
-public class MainFragment extends BaseFragment {
+public final class MainFragment extends BaseFragment {
 
     public static MainFragment newInstance() {
         return new MainFragment();
