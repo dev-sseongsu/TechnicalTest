@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
@@ -14,7 +13,9 @@
       android:id="@+id/edit_test_query"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:saveEnabled="true" />
+      android:saveEnabled="true"
+      android:imeOptions="actionSearch"
+      android:singleLine="true" />
   </com.google.android.material.textfield.TextInputLayout>
 
   <Button
@@ -25,8 +26,8 @@
     android:text="SEARCH" />
 
   <fragment
-    android:name="net.sseongsu.android.ui.kakaosearch.searchresult.SearchResultFragment"
     android:id="@+id/container_kakao_search_result"
+    android:name="net.sseongsu.android.ui.kakaosearch.searchresult.SearchResultFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
 

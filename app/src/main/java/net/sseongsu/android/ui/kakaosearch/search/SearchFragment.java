@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -56,6 +59,14 @@ public final class SearchFragment extends BaseFragment {
     protected void initView(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         editText = view.findViewById(R.id.edit_test_query);
         if (editText != null) {
+            editText.setOnEditorActionListener((v, actionId, event) -> {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_SEARCH:
+                        requestSearch();
+                        return true;
+                }
+                return false;
+            });
             editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -84,19 +95,21 @@ public final class SearchFragment extends BaseFragment {
 
         final Button button = view.findViewById(R.id.btn_search);
         if (button != null) {
-            button.setOnClickListener(v -> {
-                if (TextUtils.isEmpty(editText.getText())) {
-                    return;
-                }
-
-                if (getContext() == null) {
-                    return;
-                }
-
-                KeyboardUtils.hide(getContext(), editText);
-                search(editText.getText().toString());
-            });
+            button.setOnClickListener(v -> requestSearch());
         }
+    }
+
+    private void requestSearch() {
+        if (TextUtils.isEmpty(editText.getText())) {
+            return;
+        }
+
+        if (getContext() == null) {
+            return;
+        }
+
+        KeyboardUtils.hide(getContext(), editText);
+        search(editText.getText().toString());
     }
 
     private void search(@NonNull String query) {

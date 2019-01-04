@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
-import timber.log.Timber;
 
 public final class SearchResultFragment extends BaseFragment {
 
@@ -31,9 +30,11 @@ public final class SearchResultFragment extends BaseFragment {
     @Nullable
     private RecyclerView recyclerView;
     @Nullable
-    private View noDataView;
+    private View noDataView, btnTop;
     @Nullable
     private String query;
+    @Nullable
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected int getLayoutId() {
@@ -50,8 +51,15 @@ public final class SearchResultFragment extends BaseFragment {
     protected void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         noDataView = view.findViewById(R.id.tv_no_data);
         recyclerView = view.findViewById(R.id.recycler_view);
+        btnTop = view.findViewById(R.id.btn_top);
+        btnTop.setOnClickListener(v -> {
+            if (layoutManager != null) {
+                layoutManager.scrollToPosition(0);
+            }
+        });
         if (recyclerView != null) {
-            recyclerView.setLayoutManager(RecyclerViewLayoutManagerFactory.get(requireContext()));
+            layoutManager = RecyclerViewLayoutManagerFactory.get(requireContext());
+            recyclerView.setLayoutManager(layoutManager);
             searchResultItemAdapter = new SearchResultItemAdapter(requireContext());
             searchResultItemAdapter.setItemClickListener(imageDocument -> {
                 if (getParentFragment() != null && getParentFragment().getFragmentManager() != null) {
@@ -102,18 +110,17 @@ public final class SearchResultFragment extends BaseFragment {
     }
 
     private void changeVisibility(boolean showRecyclerView) {
-        if (recyclerView == null) {
-            return;
-        }
-        if (noDataView == null) {
+        if (recyclerView == null || noDataView == null || btnTop == null) {
             return;
         }
 
         if (showRecyclerView) {
             recyclerView.setVisibility(View.VISIBLE);
+            btnTop.setVisibility(View.VISIBLE);
             noDataView.setVisibility(View.GONE);
         } else {
             recyclerView.setVisibility(View.GONE);
+            btnTop.setVisibility(View.GONE);
             noDataView.setVisibility(View.VISIBLE);
         }
     }
