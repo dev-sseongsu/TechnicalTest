@@ -1,0 +1,20 @@
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+
+### Gradle ###
+.gradle/
+build/
+local.properties
+.externalNativeBuild
+
+
+### Intellij ###
+*.iml
+.idea/
+captures/
+/.project

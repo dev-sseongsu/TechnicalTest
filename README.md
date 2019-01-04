@@ -1,1 +1,1 @@
-# TechnicalStudy
+# TechnicalTest
