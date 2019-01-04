@@ -18,21 +18,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SearchResultItemAdapter extends RecyclerView.Adapter<SearchResultItemAdapter.ItemViewHolder> {
+class SearchResultItemAdapter extends RecyclerView.Adapter<SearchResultItemAdapter.ItemViewHolder> {
 
     @NonNull
     private Context context;
     @Nullable
     private SearchResultItemClickListener searchResultItemClickListener;
 
-    public SearchResultItemAdapter(@NonNull Context context) {
+    SearchResultItemAdapter(@NonNull Context context) {
         this.context = context;
     }
 
     @Nullable
     private List<ImageDocument> items;
 
-    public void setItemClickListener(@Nullable SearchResultItemClickListener searchResultItemClickListener) {
+    void setItemClickListener(@Nullable SearchResultItemClickListener searchResultItemClickListener) {
         this.searchResultItemClickListener = searchResultItemClickListener;
     }
 
@@ -40,15 +40,12 @@ public class SearchResultItemAdapter extends RecyclerView.Adapter<SearchResultIt
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent,false);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (searchResultItemClickListener != null) {
-                    Integer position = (Integer) v.getTag();
-                    ImageDocument imageDocument = items == null ? null : items.get(position);
-                    if (imageDocument != null) {
-                        searchResultItemClickListener.onItemClick(imageDocument);
-                    }
+        itemView.setOnClickListener(v -> {
+            if (searchResultItemClickListener != null) {
+                Integer position = (Integer) v.getTag();
+                ImageDocument imageDocument = items == null ? null : items.get(position);
+                if (imageDocument != null) {
+                    searchResultItemClickListener.onItemClick(imageDocument);
                 }
             }
         });
@@ -66,10 +63,14 @@ public class SearchResultItemAdapter extends RecyclerView.Adapter<SearchResultIt
             ImageDocument document = items.get(position);
             if (document != null) {
                 holder.itemView.setTag(position);
-                holder.displaySiteName.setText(document.getDisplaySiteName());
-                Glide.with(context)
-                        .load(document.getThumbnailUrl())
-                        .into(holder.thumbnail);
+                if (holder.displaySiteName != null) {
+                    holder.displaySiteName.setText(document.getDisplaySiteName());
+                }
+                if (holder.thumbnail != null) {
+                    Glide.with(context)
+                            .load(document.getThumbnailUrl())
+                            .into(holder.thumbnail);
+                }
             }
         }
     }
@@ -81,10 +82,12 @@ public class SearchResultItemAdapter extends RecyclerView.Adapter<SearchResultIt
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
+        @Nullable
         private TextView displaySiteName;
+        @Nullable
         private ImageView thumbnail;
 
-        ItemViewHolder(View v) {
+        ItemViewHolder(@NonNull View v) {
             super(v);
             displaySiteName = v.findViewById(R.id.tv_display_site_name);
             thumbnail = v.findViewById(R.id.image_view_thumbnail);

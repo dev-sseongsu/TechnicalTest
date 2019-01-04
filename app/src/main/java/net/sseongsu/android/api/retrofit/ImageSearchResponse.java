@@ -38,7 +38,7 @@ public class ImageSearchResponse implements ImageSearchResult {
             ImageDocument imageDocument = ImageDocument.newBuilder()
                     .setCollection(document.collection)
                     .setDatetime(document.datetime)
-                    .setDisplaySitename(document.displaySitename)
+                    .setDisplaySiteName(document.displaySitename)
                     .setDocUrl(document.docUrl)
                     .setHeight(document.height)
                     .setImageUrl(document.imageUrl)

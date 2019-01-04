@@ -23,9 +23,6 @@ public final class MainFragment extends BaseFragment {
         return R.layout.fragment_kakao_main;
     }
 
-    public MainFragment() {
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

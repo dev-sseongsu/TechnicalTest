@@ -3,6 +3,7 @@ package net.sseongsu.android.ui.kakaosearch.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public final class ImageSearchResultMetaData implements Parcelable {
@@ -14,36 +15,55 @@ public final class ImageSearchResultMetaData implements Parcelable {
     @Nullable
     private Integer totalCount;
 
-    private ImageSearchResultMetaData(Builder builder) {
+    @Nullable
+    public Boolean getEnd() {
+        return isEnd;
+    }
+
+    @Nullable
+    public Integer getPageableCount() {
+        return pageableCount;
+    }
+
+    @Nullable
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    private ImageSearchResultMetaData(@NonNull Builder builder) {
         isEnd = builder.isEnd;
         pageableCount = builder.pageableCount;
         totalCount = builder.totalCount;
     }
 
+    @NonNull
     public static Builder newBuilder() {
         return new Builder();
     }
 
 
     public static final class Builder {
+        @Nullable
         private Boolean isEnd;
+        @Nullable
         private Integer pageableCount;
+        @Nullable
         private Integer totalCount;
 
         private Builder() {
         }
 
-        public Builder setIsEnd(Boolean isEnd) {
+        public Builder setIsEnd(@NonNull Boolean isEnd) {
             this.isEnd = isEnd;
             return this;
         }
 
-        public Builder setPageableCount(Integer pageableCount) {
+        public Builder setPageableCount(@NonNull Integer pageableCount) {
             this.pageableCount = pageableCount;
             return this;
         }
 
-        public Builder setTotalCount(Integer totalCount) {
+        public Builder setTotalCount(@NonNull Integer totalCount) {
             this.totalCount = totalCount;
             return this;
         }

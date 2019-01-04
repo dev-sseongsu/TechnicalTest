@@ -3,45 +3,64 @@ package net.sseongsu.android.ui.kakaosearch.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public final class ImageDocument implements Parcelable {
 
+    @Nullable
     private String collection;
+    @Nullable
     private String datetime;
+    @Nullable
     private String displaySiteName;
+    @Nullable
     private String docUrl;
+    @Nullable
     private Integer height;
+    @Nullable
     private String imageUrl;
+    @Nullable
     private String thumbnailUrl;
+    @Nullable
     private Integer width;
 
+    @Nullable
     public String getCollection() {
         return collection;
     }
 
+    @Nullable
     public String getDatetime() {
         return datetime;
     }
 
+    @Nullable
     public String getDisplaySiteName() {
         return displaySiteName;
     }
 
+    @Nullable
     public String getDocUrl() {
         return docUrl;
     }
 
+    @Nullable
     public Integer getHeight() {
         return height;
     }
 
+    @Nullable
     public String getImageUrl() {
         return imageUrl;
     }
 
+    @Nullable
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
 
+    @Nullable
     public Integer getWidth() {
         return width;
     }
@@ -49,7 +68,7 @@ public final class ImageDocument implements Parcelable {
     private ImageDocument(Builder builder) {
         collection = builder.collection;
         datetime = builder.datetime;
-        displaySiteName = builder.displaySitename;
+        displaySiteName = builder.displaySiteName;
         docUrl = builder.docUrl;
         height = builder.height;
         imageUrl = builder.imageUrl;
@@ -63,54 +82,62 @@ public final class ImageDocument implements Parcelable {
 
 
     public static final class Builder {
+        @Nullable
         private String collection;
+        @Nullable
         private String datetime;
-        private String displaySitename;
+        @Nullable
+        private String displaySiteName;
+        @Nullable
         private String docUrl;
+        @Nullable
         private Integer height;
+        @Nullable
         private String imageUrl;
+        @Nullable
         private String thumbnailUrl;
+        @Nullable
         private Integer width;
 
         private Builder() {
         }
 
-        public Builder setCollection(String collection) {
+        public Builder setCollection(@NonNull String collection) {
             this.collection = collection;
             return this;
         }
 
-        public Builder setDatetime(String datetime) {
+        public Builder setDatetime(@NonNull String datetime) {
             this.datetime = datetime;
             return this;
         }
 
-        public Builder setDisplaySitename(String displaySitename) {
-            this.displaySitename = displaySitename;
+        public Builder setDisplaySiteName(@NonNull String displaySiteName) {
+            this.displaySiteName = displaySiteName;
             return this;
         }
 
-        public Builder setDocUrl(String docUrl) {
+        public Builder setDocUrl(@NonNull String docUrl) {
             this.docUrl = docUrl;
             return this;
         }
 
-        public Builder setHeight(Integer height) {
+        public Builder setHeight(@NonNull Integer height) {
             this.height = height;
             return this;
         }
 
-        public Builder setImageUrl(String imageUrl) {
+        public Builder setImageUrl(@NonNull String imageUrl) {
             this.imageUrl = imageUrl;
             return this;
         }
 
-        public Builder setThumbnailUrl(String thumbnailUrl) {
+        public Builder setThumbnailUrl(@NonNull String thumbnailUrl) {
             this.thumbnailUrl = thumbnailUrl;
             return this;
         }
 
-        public Builder setWidth(Integer width) {
+        public Builder setWidth(@NonNull Integer width) {
             this.width = width;
             return this;
         }
