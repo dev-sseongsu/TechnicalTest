@@ -6,10 +6,12 @@ TechnicalTest
 
 개발환경
 -
+ - Language 
+   - java
  - Android Studio 3.2.1
- - compileSdk 28
- - minSdk 21
- - targetSdk 28
+   - compileSdk 28
+   - minSdk 21
+   - targetSdk 28
  
 라이브러리
 -
