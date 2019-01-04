@@ -68,7 +68,7 @@ public final class SearchFragment extends BaseFragment {
                     }
 
                     if (viewModel != null) {
-                        viewModel.setSearchQuery(s);
+                        viewModel.setSearchQuery(s.toString());
                     }
                 }
 
@@ -84,20 +84,17 @@ public final class SearchFragment extends BaseFragment {
 
         final Button button = view.findViewById(R.id.btn_search);
         if (button != null) {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (TextUtils.isEmpty(editText.getText())) {
-                        return;
-                    }
-
-                    if (getContext() == null) {
-                        return;
-                    }
-
-                    KeyboardUtils.hide(getContext(), editText);
-                    search(editText.getText().toString());
+            button.setOnClickListener(v -> {
+                if (TextUtils.isEmpty(editText.getText())) {
+                    return;
                 }
+
+                if (getContext() == null) {
+                    return;
+                }
+
+                KeyboardUtils.hide(getContext(), editText);
+                search(editText.getText().toString());
             });
         }
     }

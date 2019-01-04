@@ -1,27 +1,41 @@
 package net.sseongsu.android.ui.kakaosearch.search;
 
+import android.util.ArrayMap;
+
+import net.sseongsu.android.ui.kakaosearch.model.ImageSearchResult;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 public final class SearchViewModel extends ViewModel {
 
-    private MutableLiveData<String> searchQueryLiveData = new MutableLiveData<>();
+    @Nullable
+    private String searchQuery;
 
-    public void observeSearchQuery(@NonNull LifecycleOwner lifecycleOwner,
-                                   @NonNull Observer<String> observer) {
-        searchQueryLiveData.observe(lifecycleOwner, observer);
-    }
+    private ArrayMap<String, ImageSearchResult> searchResultArrayMap = new ArrayMap<>();
 
-    public void setSearchQuery(@NonNull CharSequence searchQuery) {
-        searchQueryLiveData.setValue(searchQuery.toString());
+    public void setSearchQuery(@NonNull String searchQuery) {
+        this.searchQuery = searchQuery;
     }
 
     @Nullable
     public String getSearchQuery() {
-        return searchQueryLiveData.getValue();
+        return searchQuery;
+    }
+
+    public void setImageSearchResult(@NonNull String searchQuery,
+                                     @NonNull ImageSearchResult imageSearchResult) {
+        searchResultArrayMap.clear();
+        searchResultArrayMap.put(searchQuery, imageSearchResult);
+    }
+
+    @Nullable
+    public ImageSearchResult getImageSearchResult() {
+        if (searchQuery == null) {
+            return null;
+        }
+
+        return searchResultArrayMap.get(searchQuery);
     }
 }
