@@ -9,5 +9,5 @@ public interface ImageSearchResult {
     @NonNull
     List<ImageDocument> getDocuments();
     @NonNull
-    ImageSearchResultMetaData getImageSearchResultMetaData();
+    ImageSearchResultMetaData getMetaData();
 }

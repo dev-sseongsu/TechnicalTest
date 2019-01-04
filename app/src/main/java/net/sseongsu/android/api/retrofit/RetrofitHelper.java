@@ -13,7 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public final class RetrofitHelper {
+final class RetrofitHelper {
 
     private static final String BASE_URL = "https://dapi.kakao.com/v2/";
     private static final String KAKAO_REST_API_KEY = "KakaoAK 0e2dce46c2845d1236c9cd3ef9087e12";
@@ -48,7 +48,7 @@ public final class RetrofitHelper {
         }
     }
 
-    public static Retrofit getRetrofit() {
+    static Retrofit getRetrofit() {
         return SingletonHolder.INSTANCE.retrofit;
     }
 

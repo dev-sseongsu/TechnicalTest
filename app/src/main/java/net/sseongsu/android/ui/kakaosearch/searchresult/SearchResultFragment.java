@@ -13,7 +13,9 @@ import net.sseongsu.android.ui.kakaosearch.serachresultdetail.SearchResultDetail
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
+import timber.log.Timber;
 
 public final class SearchResultFragment extends BaseFragment {
 
@@ -29,6 +31,8 @@ public final class SearchResultFragment extends BaseFragment {
     private RecyclerView recyclerView;
     @Nullable
     private View noDataView;
+    @Nullable
+    private String query;
 
     @Override
     protected int getLayoutId() {
@@ -66,9 +70,11 @@ public final class SearchResultFragment extends BaseFragment {
         }
     }
 
-    public void search(@NonNull String query) {
-        Api.get(requireContext()).getKaKaoSearch().searchImage(query).observe(this, imageSearchResult -> {
-            if (imageSearchResult == null) {
+    private final Observer<ImageSearchResult> searchResultObserver = new Observer<ImageSearchResult>() {
+        @Override
+        public void onChanged(ImageSearchResult imageSearchResult) {
+            if (imageSearchResult == null || imageSearchResult.getDocuments().size() == 0) {
+                changeVisibility(false);
                 return;
             }
 
@@ -77,7 +83,12 @@ public final class SearchResultFragment extends BaseFragment {
             }
 
             setRecyclerViewData(imageSearchResult);
-        });
+        }
+    };
+
+    public void search(@NonNull String query) {
+        this.query = query;
+        Api.get(requireContext()).getKaKaoSearch().searchImage(query).observe(this, searchResultObserver);
     }
 
     private void setRecyclerViewData(@NonNull ImageSearchResult imageSearchResult) {

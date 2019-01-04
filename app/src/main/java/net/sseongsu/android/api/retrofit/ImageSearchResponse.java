@@ -53,7 +53,7 @@ public class ImageSearchResponse implements ImageSearchResult {
 
     @NonNull
     @Override
-    public ImageSearchResultMetaData getImageSearchResultMetaData() {
+    public ImageSearchResultMetaData getMetaData() {
         if (imageSearchResultMetaData == null) {
             imageSearchResultMetaData = ImageSearchResultMetaData.newBuilder()
                     .setIsEnd(meta.isEnd)
