@@ -16,7 +16,7 @@ public final class ImageSearchResultMetaData implements Parcelable {
     private Integer totalCount;
 
     @Nullable
-    public Boolean getEnd() {
+    public Boolean isEnd() {
         return isEnd;
     }
 
