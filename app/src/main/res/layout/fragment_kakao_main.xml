@@ -4,4 +4,4 @@
   android:id="@+id/container_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="net.sseongsu.android.MainActivity"/>
+  tools:context="net.madaru.android.MainActivity"/>
